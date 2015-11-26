@@ -10,9 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var board: Board!
+    
+    var brushes = [PencilBrush(),LineBrush(),DashLineBrush(),RectangleBrush(),EllipseBrush(),EraserBrush()]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.board.brush = self.brushes[0]
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +25,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func switchBrush(sender: UISegmentedControl) {
+        assert(sender.selectedSegmentIndex < self.brushes.count,"No Implementation of This Tool")
+        
+        self.board.brush = self.brushes[sender.selectedSegmentIndex]
+    }
 
 }
 

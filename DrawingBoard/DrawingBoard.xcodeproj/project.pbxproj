@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4971A44F1C05F30300AA19E7 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4971A44E1C05F30300AA19E7 /* Board.swift */; };
+		4971A4511C073FC000AA19E7 /* BaseBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4971A4501C073FC000AA19E7 /* BaseBrush.swift */; };
 		497EA6C01C05ED1600024983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EA6BF1C05ED1600024983 /* AppDelegate.swift */; };
 		497EA6C21C05ED1600024983 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EA6C11C05ED1600024983 /* ViewController.swift */; };
 		497EA6C51C05ED1600024983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497EA6C31C05ED1600024983 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4971A44E1C05F30300AA19E7 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		4971A4501C073FC000AA19E7 /* BaseBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrush.swift; sourceTree = "<group>"; };
 		497EA6BC1C05ED1600024983 /* DrawingBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497EA6BF1C05ED1600024983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		497EA6C11C05ED1600024983 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				497EA6C61C05ED1600024983 /* Assets.xcassets */,
 				497EA6C81C05ED1600024983 /* LaunchScreen.storyboard */,
 				497EA6CB1C05ED1600024983 /* Info.plist */,
+				4971A44E1C05F30300AA19E7 /* Board.swift */,
+				4971A4501C073FC000AA19E7 /* BaseBrush.swift */,
 			);
 			path = DrawingBoard;
 			sourceTree = "<group>";
@@ -136,7 +142,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				497EA6C21C05ED1600024983 /* ViewController.swift in Sources */,
+				4971A4511C073FC000AA19E7 /* BaseBrush.swift in Sources */,
 				497EA6C01C05ED1600024983 /* AppDelegate.swift in Sources */,
+				4971A44F1C05F30300AA19E7 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +294,7 @@
 				497EA6D01C05ED1600024983 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
