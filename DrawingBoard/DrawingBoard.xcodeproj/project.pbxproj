@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493FC3D61C0F21E9002A6965 /* PaintingBrushSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FC3D51C0F21E9002A6965 /* PaintingBrushSettingsView.swift */; };
 		4971A44F1C05F30300AA19E7 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4971A44E1C05F30300AA19E7 /* Board.swift */; };
 		4971A4511C073FC000AA19E7 /* BaseBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4971A4501C073FC000AA19E7 /* BaseBrush.swift */; };
+		4971A4551C08AE1E00AA19E7 /* PaintingBrushSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4971A4541C08AE1E00AA19E7 /* PaintingBrushSettingsView.xib */; };
 		497EA6C01C05ED1600024983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EA6BF1C05ED1600024983 /* AppDelegate.swift */; };
 		497EA6C21C05ED1600024983 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EA6C11C05ED1600024983 /* ViewController.swift */; };
 		497EA6C51C05ED1600024983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497EA6C31C05ED1600024983 /* Main.storyboard */; };
@@ -17,8 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		493FC3D51C0F21E9002A6965 /* PaintingBrushSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingBrushSettingsView.swift; sourceTree = "<group>"; };
 		4971A44E1C05F30300AA19E7 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		4971A4501C073FC000AA19E7 /* BaseBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrush.swift; sourceTree = "<group>"; };
+		4971A4541C08AE1E00AA19E7 /* PaintingBrushSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaintingBrushSettingsView.xib; sourceTree = "<group>"; };
 		497EA6BC1C05ED1600024983 /* DrawingBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497EA6BF1C05ED1600024983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		497EA6C11C05ED1600024983 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				497EA6CB1C05ED1600024983 /* Info.plist */,
 				4971A44E1C05F30300AA19E7 /* Board.swift */,
 				4971A4501C073FC000AA19E7 /* BaseBrush.swift */,
+				4971A4541C08AE1E00AA19E7 /* PaintingBrushSettingsView.xib */,
+				493FC3D51C0F21E9002A6965 /* PaintingBrushSettingsView.swift */,
 			);
 			path = DrawingBoard;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4971A4551C08AE1E00AA19E7 /* PaintingBrushSettingsView.xib in Resources */,
 				497EA6CA1C05ED1600024983 /* LaunchScreen.storyboard in Resources */,
 				497EA6C71C05ED1600024983 /* Assets.xcassets in Resources */,
 				497EA6C51C05ED1600024983 /* Main.storyboard in Resources */,
@@ -143,6 +150,7 @@
 			files = (
 				497EA6C21C05ED1600024983 /* ViewController.swift in Sources */,
 				4971A4511C073FC000AA19E7 /* BaseBrush.swift in Sources */,
+				493FC3D61C0F21E9002A6965 /* PaintingBrushSettingsView.swift in Sources */,
 				497EA6C01C05ED1600024983 /* AppDelegate.swift in Sources */,
 				4971A44F1C05F30300AA19E7 /* Board.swift in Sources */,
 			);

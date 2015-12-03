@@ -53,14 +53,31 @@
                                     <constraint firstAttribute="height" constant="44" id="tiP-7b-n0N"/>
                                 </constraints>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bS-xz-mch">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="jk6-yp-tRj"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="画笔设置" id="prU-16-Eaz">
+                                        <connections>
+                                            <action selector="paintingBrushSettings:" destination="BYZ-38-t0r" id="eHM-XY-qxX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fKj-fH-n9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6GL-vk-mas"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9bS-xz-mch" secondAttribute="bottom" id="AXc-VV-0uJ"/>
                             <constraint firstItem="fKj-fH-n9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DIU-Lh-YBq"/>
                             <constraint firstItem="4gT-bS-4Ye" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="EJQ-35-lfb"/>
+                            <constraint firstAttribute="trailing" secondItem="9bS-xz-mch" secondAttribute="trailing" id="Kpu-pN-nYZ"/>
                             <constraint firstAttribute="trailing" secondItem="fKj-fH-n9i" secondAttribute="trailing" id="O2h-id-F1o"/>
+                            <constraint firstItem="9bS-xz-mch" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Rw1-xD-vcG"/>
                             <constraint firstAttribute="trailing" secondItem="4gT-bS-4Ye" secondAttribute="trailing" id="SCT-DF-twg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4gT-bS-4Ye" secondAttribute="bottom" id="gHa-8e-CSg"/>
                             <constraint firstItem="4gT-bS-4Ye" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ohK-eO-194"/>
@@ -68,6 +85,8 @@
                     </view>
                     <connections>
                         <outlet property="board" destination="4gT-bS-4Ye" id="nvW-48-NMZ"/>
+                        <outlet property="toolar" destination="9bS-xz-mch" id="pK0-hu-UW2"/>
+                        <outlet property="toolarHeightConstraint" destination="jk6-yp-tRj" id="CrG-Qe-UZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -16,7 +16,7 @@ class Board: UIImageView {
 
     var drawingState: DrawingState!
     
-    var strokeWidth: CGFloat
+    var strokeWidth: Int
     var strokeColor: UIColor
     
     var brush: BaseBrush?
@@ -101,7 +101,7 @@ class Board: UIImageView {
             UIRectFill(self.bounds)
             
             CGContextSetLineCap(context, .Round)
-            CGContextSetLineWidth(context, self.strokeWidth)
+            CGContextSetLineWidth(context, CGFloat(self.strokeWidth))
             CGContextSetStrokeColorWithColor(context, self.strokeColor.CGColor)
             
             //3,把之前保存的图片绘制进context中
@@ -110,7 +110,7 @@ class Board: UIImageView {
             }
             
             //4,设置brush的基本属性，以便子类更方便的绘图；调用具体的绘图方法，并最终添加到context中
-            brush.strokeWidth = self.strokeWidth
+            brush.strokeWidth = CGFloat(self.strokeWidth)
             brush.drawInContext(context!)
             CGContextStrokePath(context)
             
