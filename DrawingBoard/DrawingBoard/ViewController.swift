@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var topToolbarView: UIView!
     @IBOutlet weak var board: Board!
     
     @IBOutlet weak var toolar: UIToolbar!
@@ -18,12 +19,44 @@ class ViewController: UIViewController {
     var toolbarEditingItems: [UIBarButtonItem]?
     var currentSettingsView: UIView?
     
+    
     var brushes = [PencilBrush(),LineBrush(),DashLineBrush(),RectangleBrush(),EllipseBrush(),EraserBrush()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.board.brush = self.brushes[0]
+        
+        self.board.drawingStateChangedBlock = {
+            [unowned self] (state: DrawingState) -> () in
+            if state != DrawingState.Moved {
+                
+                UIView.beginAnimations(nil, context: nil)
+                print("I")
+                
+                //TODO:启动以后第一次画时，工具条不能隐藏，调试发现代码执行了，但是界面似乎没有刷新。
+                if state == .Began {
+                    self.topToolbarView.center.y = -self.topToolbarView.center.y
+                    self.toolar.center.y = self.toolar.center.y + self.toolar.bounds.size.height
+                    
+                    self.topToolbarView.layoutIfNeeded()
+                    self.toolar.layoutIfNeeded()
+                    print("B \(self.topToolbarView.center.y) \(self.toolar.center.y)")
+                } else if state == .Ended {
+                    UIView.setAnimationDelay(0.5)
+                    
+                    self.topToolbarView.center.y = self.topToolbarView.bounds.size.height / 2.0
+                    self.toolar.center.y = self.view.bounds.height - self.toolar.bounds.size.height / 2.0
+                    
+                    self.topToolbarView.layoutIfNeeded()
+                    self.toolar.layoutIfNeeded()
+                    print("E")
+                }
+                
+                UIView.commitAnimations()
+                print("L")
+            }
+        }
         
         self.toolbarEditingItems = [
             UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
@@ -33,6 +66,7 @@ class ViewController: UIViewController {
         self.toolbarItems = self.toolar.items
         
         self.setupBrushSettingsView()
+        self.setupBackgroundSettingsView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +93,6 @@ class ViewController: UIViewController {
     func updateToolbarForSettingsView() {
         //自动计算的高度为零
         self.toolarHeightConstraint.constant = self.currentSettingsView!.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height + 44
-        print("\(self.currentSettingsView!.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height)")
         
         self.toolar.setItems(self.toolbarEditingItems, animated: true)
         UIView.beginAnimations(nil, context: nil)
@@ -116,6 +149,48 @@ class ViewController: UIViewController {
                         [unowned self] (strokeWidth: Int) -> Void in
                         self.board.strokeWidth = strokeWidth
                     }
+        }
+    }
+    
+    func setupBackgroundSettingsView() {
+        if let backgroundSettingsVC = UINib(nibName: "BackgroundViewController", bundle: nil).instantiateWithOwner(nil, options: nil).first as? BackgroundViewController {
+            
+            self.addConstraintsToToolbarForSettingsView(backgroundSettingsVC.view)
+            
+            backgroundSettingsVC.view.hidden = true
+            backgroundSettingsVC.view.tag = 2
+            backgroundSettingsVC.setBackgroundColor(self.board.backgroundColor!)
+            
+            self.addChildViewController(backgroundSettingsVC)
+            
+            backgroundSettingsVC.backgroundImageChangedBlock = {
+                [unowned self] (backgroundImage: UIImage) in
+                self.board.backgroundColor = UIColor(patternImage: backgroundImage)
+            }
+
+            backgroundSettingsVC.backgroundColorChangedBlock = {
+                [unowned self] (backgroundColor: UIColor) in
+                self.board.backgroundColor = backgroundColor
+            }            
+        }
+    }
+    
+    @IBAction func backgroundSettings(sender: AnyObject) {
+        self.currentSettingsView = self.toolar.viewWithTag(2)
+        self.currentSettingsView?.hidden = false
+        
+        self.updateToolbarForSettingsView()
+    }
+    
+    @IBAction func saveToAlbumy(sender: AnyObject) {
+        UIImageWriteToSavedPhotosAlbum(self.board.takeImage(), self, "image:didFinishSavingWithError:contextInfo:", nil)
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        if let err = error {
+            UIAlertView(title: "错误", message: err.localizedDescription, delegate: nil, cancelButtonTitle: "确定").show()
+        } else {
+            UIAlertView(title: "提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定").show()
         }
     }
     
