@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var toolar: UIToolbar!
     @IBOutlet weak var toolarHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var redoButton: UIButton!
+    
     var toolbarEditingItems: [UIBarButtonItem]?
     var currentSettingsView: UIView?
     
@@ -32,7 +35,8 @@ class ViewController: UIViewController {
             if state != DrawingState.Moved {
                 
                 UIView.beginAnimations(nil, context: nil)
-                print("I")
+                
+//                print("I")
                 
                 //TODO:启动以后第一次画时，工具条不能隐藏，调试发现代码执行了，但是界面似乎没有刷新。
                 if state == .Began {
@@ -41,7 +45,11 @@ class ViewController: UIViewController {
                     
                     self.topToolbarView.layoutIfNeeded()
                     self.toolar.layoutIfNeeded()
-                    print("B \(self.topToolbarView.center.y) \(self.toolar.center.y)")
+                    
+                    self.undoButton.alpha = 0
+                    self.redoButton.alpha = 0
+                    
+//                    print("B \(self.topToolbarView.center.y) \(self.toolar.center.y)")
                 } else if state == .Ended {
                     UIView.setAnimationDelay(0.5)
                     
@@ -50,11 +58,18 @@ class ViewController: UIViewController {
                     
                     self.topToolbarView.layoutIfNeeded()
                     self.toolar.layoutIfNeeded()
-                    print("E")
+                    
+                    self.undoButton.alpha = 1
+                    self.redoButton.alpha = 1
+                    
+                    self.undoButton.enabled = self.board.canUndo
+                    self.redoButton.enabled = self.board.canRedo
+                    
+//                    print("E")
                 }
                 
                 UIView.commitAnimations()
-                print("L")
+//                print("L")
             }
         }
         
@@ -194,5 +209,19 @@ class ViewController: UIViewController {
         }
     }
     
+    //TODO:按钮不可用时，在按钮上点击以后，直接就画图了。个人觉得这时应该什么也不做才和逻辑。
+    @IBAction func undo(sender: AnyObject) {
+        self.board.undo()
+        
+        self.undoButton.enabled = self.board.canUndo
+        self.redoButton.enabled = self.board.canRedo
+    }
+    
+    @IBAction func redo(sender: AnyObject) {
+        self.board.redo()
+        
+        self.undoButton.enabled = self.board.canUndo
+        self.redoButton.enabled = self.board.canRedo
+    }
 }
 

@@ -24,6 +24,9 @@ class Board: UIImageView {
     var brush: BaseBrush?
     var realImage: UIImage?
     
+    private var undoImages = [UIImage]()
+    private var redoImages = [UIImage]()
+    
     init() {
         self.strokeColor = UIColor.blackColor()
         self.strokeWidth = 1
@@ -143,10 +146,67 @@ class Board: UIImageView {
             
             UIGraphicsEndImageContext()
             
+            //Undo and Redo
+            if self.drawingState == DrawingState.Began {
+                self.redoImages = []
+                
+                if nil != self.image {
+                    self.undoImages.append(self.image!)
+                }
+            }
+            
             //6,实时显示当前的绘制状态，并记录绘制的最后一个点
             self.image = previewImage
             
             brush.lastPoint = brush.endPoint
+        }
+    }
+    
+    //MARK: - Undo / Redo
+    var canUndo: Bool {
+        get {
+            return self.undoImages.count > 0 || self.image != nil
+        }
+    }
+    
+    var canRedo: Bool {
+        get {
+            return self.redoImages.count > 0
+        }
+    }
+    
+    func undo() {
+        if self.canUndo == false {
+            return
+        }
+        
+        if self.undoImages.count > 0 {
+            self.redoImages.append(self.image!)
+            
+            let lastImage = self.undoImages.removeLast()
+            self.image = lastImage
+        } else if self.image != nil {
+            self.redoImages.append(self.image!)
+            self.image = nil
+        }
+        
+        self.realImage = self.image
+    }
+    
+    func redo() {
+        if false == self.canRedo {
+            return
+        }
+        
+        if self.redoImages.count > 0 {
+            if nil != self.image {
+                self.undoImages.append(self.image!)
+            }
+            
+            let lastImage = self.redoImages.removeLast()
+            self.image = lastImage
+            
+            self.realImage = self.image
         }
     }
 }
