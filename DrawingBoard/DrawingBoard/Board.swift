@@ -24,8 +24,101 @@ class Board: UIImageView {
     var brush: BaseBrush?
     var realImage: UIImage?
     
-    private var undoImages = [UIImage]()
-    private var redoImages = [UIImage]()
+    //MARK: - Undo and Redo
+    private class DBUndoManager {
+        class DBImageFault: UIImage {}
+        
+        private static let INVALID_INDEX = -1
+        private var images = [UIImage]()
+        private var index = INVALID_INDEX
+        
+        var canUndo: Bool {
+            get {
+                return index != DBUndoManager.INVALID_INDEX
+            }
+        }
+        
+        var canRedo: Bool {
+            get {
+                return index + 1 < images.count
+            }
+        }
+        
+        func addImage(image: UIImage) {
+            if index < images.count - 1 {
+                images[index + 1 ... images.count - 1] = []
+            }
+            
+            images.append(image)
+            
+            index = images.count - 1
+            
+            setNeedsCache()
+        }
+        
+        func imageForUndo() -> UIImage? {
+            if self.canUndo {
+                --index
+                if self.canUndo == false {
+                    return nil
+                } else {
+                    setNeedsCache()
+                    return images[index]
+                }
+            } else {
+                return nil
+            }
+        }
+        
+        func imageForRedo() -> UIImage? {
+            var image: UIImage? = nil
+            if self.canRedo {
+                image = images[++index]
+            }
+            setNeedsCache()
+            return image
+        }
+        
+        //MARK: - Cache
+        private static let cahcesLength = 3
+        
+        private func setNeedsCache() {
+            if images.count >= DBUndoManager.cahcesLength {
+                let location = max(0,index - DBUndoManager.cahcesLength)
+                let length = min(images.count - 1, index + DBUndoManager.cahcesLength)
+                for i in location ... length {
+                    autoreleasepool({
+                        let image = images[i]
+                        
+                        if i > index - DBUndoManager.cahcesLength && i < index + DBUndoManager.cahcesLength {
+                            setRealImage(image, forIndex: i)
+                        } else {
+                            setFaultImage(image, forIndex: i)
+                        }
+                    })
+                }
+            }
+        }
+        
+        private static var basePath: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
+        
+        private func setFaultImage(image: UIImage, forIndex: Int) {
+            if !image.isKindOfClass(DBImageFault.self) {
+                let imagePath = (DBUndoManager.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
+                UIImagePNGRepresentation(image)?.writeToFile(imagePath, atomically: false)
+                images[forIndex] = DBImageFault()
+            }
+        }
+        
+        private func setRealImage(image: UIImage, forIndex: Int) {
+            if image.isKindOfClass(DBImageFault.self) {
+                let imagePath = (DBUndoManager.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
+                images[forIndex] = UIImage(data: NSData(contentsOfFile: imagePath)!)!
+            }
+        }
+    }
+    
+    private var boardUndoManager = DBUndoManager()
     
     init() {
         self.strokeColor = UIColor.blackColor()
@@ -147,12 +240,8 @@ class Board: UIImageView {
             UIGraphicsEndImageContext()
             
             //Undo and Redo
-            if self.drawingState == DrawingState.Began {
-                self.redoImages = []
-                
-                if nil != self.image {
-                    self.undoImages.append(self.image!)
-                }
+            if self.drawingState == DrawingState.Ended {
+                self.boardUndoManager.addImage(self.image!)
             }
             
             //6,实时显示当前的绘制状态，并记录绘制的最后一个点
@@ -165,13 +254,13 @@ class Board: UIImageView {
     //MARK: - Undo / Redo
     var canUndo: Bool {
         get {
-            return self.undoImages.count > 0 || self.image != nil
+            return self.boardUndoManager.canUndo
         }
     }
     
     var canRedo: Bool {
         get {
-            return self.redoImages.count > 0
+            return self.boardUndoManager.canRedo
         }
     }
     
@@ -180,15 +269,7 @@ class Board: UIImageView {
             return
         }
         
-        if self.undoImages.count > 0 {
-            self.redoImages.append(self.image!)
-            
-            let lastImage = self.undoImages.removeLast()
-            self.image = lastImage
-        } else if self.image != nil {
-            self.redoImages.append(self.image!)
-            self.image = nil
-        }
+        self.image = self.boardUndoManager.imageForUndo()
         
         self.realImage = self.image
     }
@@ -198,16 +279,9 @@ class Board: UIImageView {
             return
         }
         
-        if self.redoImages.count > 0 {
-            if nil != self.image {
-                self.undoImages.append(self.image!)
-            }
-            
-            let lastImage = self.redoImages.removeLast()
-            self.image = lastImage
-            
-            self.realImage = self.image
-        }
+        self.image = self.boardUndoManager.imageForRedo()
+        
+        self.realImage = self.image
     }
 }
 
