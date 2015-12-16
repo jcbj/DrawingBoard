@@ -30,6 +30,9 @@
                                             <segment title="圆形"/>
                                             <segment title="橡皮擦"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="switchBrush:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pq7-Vc-Fg4"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +52,7 @@
                                     <barButtonItem title="画笔设置" id="6nx-Fc-yCb"/>
                                 </items>
                             </toolbar>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y6h-xz-FUT" userLabel="Image View">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y6h-xz-FUT" userLabel="Image View" customClass="Board" customModule="DrawingBoard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -70,6 +73,9 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="board" destination="y6h-xz-FUT" id="I7d-Ej-1Jz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

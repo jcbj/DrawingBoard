@@ -12,6 +12,14 @@
 		49ED87CE1C2194A7007FEE6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED87CC1C2194A7007FEE6F /* Main.storyboard */; };
 		49ED87D01C2194A7007FEE6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49ED87CF1C2194A7007FEE6F /* Assets.xcassets */; };
 		49ED87D31C2194A7007FEE6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED87D11C2194A7007FEE6F /* LaunchScreen.storyboard */; };
+		49ED87DC1C21B00E007FEE6F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87DB1C21B00E007FEE6F /* Board.swift */; };
+		49ED87DE1C21B322007FEE6F /* BaseBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87DD1C21B322007FEE6F /* BaseBrush.swift */; };
+		49ED87E11C21BB46007FEE6F /* PencilBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87E01C21BB46007FEE6F /* PencilBrush.swift */; };
+		49ED87E31C21BDA6007FEE6F /* LineBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87E21C21BDA6007FEE6F /* LineBrush.swift */; };
+		49ED87E51C21BDF8007FEE6F /* DashLineBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87E41C21BDF8007FEE6F /* DashLineBrush.swift */; };
+		49ED87E71C21BE90007FEE6F /* RectangleBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87E61C21BE90007FEE6F /* RectangleBrush.swift */; };
+		49ED87E91C21BF9B007FEE6F /* EllipseBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87E81C21BF9B007FEE6F /* EllipseBrush.swift */; };
+		49ED87EB1C21C059007FEE6F /* EraserBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87EA1C21C059007FEE6F /* EraserBrush.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		49ED87CF1C2194A7007FEE6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49ED87D21C2194A7007FEE6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49ED87D41C2194A7007FEE6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49ED87DB1C21B00E007FEE6F /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		49ED87DD1C21B322007FEE6F /* BaseBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrush.swift; sourceTree = "<group>"; };
+		49ED87E01C21BB46007FEE6F /* PencilBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilBrush.swift; sourceTree = "<group>"; };
+		49ED87E21C21BDA6007FEE6F /* LineBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBrush.swift; sourceTree = "<group>"; };
+		49ED87E41C21BDF8007FEE6F /* DashLineBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLineBrush.swift; sourceTree = "<group>"; };
+		49ED87E61C21BE90007FEE6F /* RectangleBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleBrush.swift; sourceTree = "<group>"; };
+		49ED87E81C21BF9B007FEE6F /* EllipseBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipseBrush.swift; sourceTree = "<group>"; };
+		49ED87EA1C21C059007FEE6F /* EraserBrush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EraserBrush.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +74,34 @@
 				49ED87CF1C2194A7007FEE6F /* Assets.xcassets */,
 				49ED87D41C2194A7007FEE6F /* Info.plist */,
 				49ED87D11C2194A7007FEE6F /* LaunchScreen.storyboard */,
+				49ED87DF1C21BB07007FEE6F /* Brushs */,
+				49ED87DA1C21AFAF007FEE6F /* Board */,
 				49ED87CC1C2194A7007FEE6F /* Main.storyboard */,
 				49ED87CA1C2194A7007FEE6F /* ViewController.swift */,
 			);
 			path = DrawingBoard;
+			sourceTree = "<group>";
+		};
+		49ED87DA1C21AFAF007FEE6F /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				49ED87DB1C21B00E007FEE6F /* Board.swift */,
+				49ED87DD1C21B322007FEE6F /* BaseBrush.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		49ED87DF1C21BB07007FEE6F /* Brushs */ = {
+			isa = PBXGroup;
+			children = (
+				49ED87E01C21BB46007FEE6F /* PencilBrush.swift */,
+				49ED87E21C21BDA6007FEE6F /* LineBrush.swift */,
+				49ED87E41C21BDF8007FEE6F /* DashLineBrush.swift */,
+				49ED87E61C21BE90007FEE6F /* RectangleBrush.swift */,
+				49ED87E81C21BF9B007FEE6F /* EllipseBrush.swift */,
+				49ED87EA1C21C059007FEE6F /* EraserBrush.swift */,
+			);
+			path = Brushs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +175,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49ED87EB1C21C059007FEE6F /* EraserBrush.swift in Sources */,
+				49ED87E71C21BE90007FEE6F /* RectangleBrush.swift in Sources */,
+				49ED87E11C21BB46007FEE6F /* PencilBrush.swift in Sources */,
 				49ED87CB1C2194A7007FEE6F /* ViewController.swift in Sources */,
+				49ED87DE1C21B322007FEE6F /* BaseBrush.swift in Sources */,
+				49ED87E51C21BDF8007FEE6F /* DashLineBrush.swift in Sources */,
 				49ED87C91C2194A7007FEE6F /* AppDelegate.swift in Sources */,
+				49ED87E91C21BF9B007FEE6F /* EllipseBrush.swift in Sources */,
+				49ED87E31C21BDA6007FEE6F /* LineBrush.swift in Sources */,
+				49ED87DC1C21B00E007FEE6F /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
