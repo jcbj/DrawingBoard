@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PaintingBrushSettingView" customModule="DrawingBoard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="SJp-r8-hqT" userLabel="sliderWidth">
+                    <rect key="frame" x="6" y="36" width="262" height="31"/>
+                    <connections>
+                        <action selector="sliderWidthValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="K9i-tq-0Sn"/>
+                    </connections>
+                </slider>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MGy-1Z-ZPG" userLabel="endWidth">
+                    <rect key="frame" x="274" y="36" width="38" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="画笔宽度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o41-73-IcJ" userLabel="textWidth">
+                    <rect key="frame" x="8" y="8" width="68" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyb-Sc-Ta7" userLabel="displayWidth">
+                    <rect key="frame" x="84" y="8.5" width="192" height="20"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="oZp-Ib-uxa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="SJp-r8-hqT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="A8C-7k-7zf"/>
+                <constraint firstItem="iyb-Sc-Ta7" firstAttribute="centerY" secondItem="o41-73-IcJ" secondAttribute="centerY" id="ALZ-aE-Hvs"/>
+                <constraint firstItem="iyb-Sc-Ta7" firstAttribute="leading" secondItem="o41-73-IcJ" secondAttribute="trailing" constant="8" id="B9F-NU-F88"/>
+                <constraint firstItem="SJp-r8-hqT" firstAttribute="top" secondItem="o41-73-IcJ" secondAttribute="bottom" constant="8" id="LjF-Ai-6Q7"/>
+                <constraint firstItem="o41-73-IcJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="VOe-A7-PDO"/>
+                <constraint firstItem="MGy-1Z-ZPG" firstAttribute="leading" secondItem="SJp-r8-hqT" secondAttribute="trailing" constant="8" id="ZvJ-cD-erk"/>
+                <constraint firstItem="o41-73-IcJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="iv9-uY-Rpn"/>
+                <constraint firstItem="MGy-1Z-ZPG" firstAttribute="centerY" secondItem="SJp-r8-hqT" secondAttribute="centerY" id="k15-4q-Fpk"/>
+                <constraint firstItem="iyb-Sc-Ta7" firstAttribute="trailing" secondItem="SJp-r8-hqT" secondAttribute="trailing" id="n4m-db-bYp"/>
+                <constraint firstAttribute="trailing" secondItem="MGy-1Z-ZPG" secondAttribute="trailing" constant="8" id="rlv-nb-e7n"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="displayWidthHeightConstraint" destination="oZp-Ib-uxa" id="eqH-Ny-bKl"/>
+                <outlet property="labelDisplayWidth" destination="iyb-Sc-Ta7" id="0up-1L-pmh"/>
+                <outlet property="sliderWidth" destination="SJp-r8-hqT" id="lk7-53-WHI"/>
+                <outlet property="tfWidth" destination="MGy-1Z-ZPG" id="h1N-IH-H4l"/>
+            </connections>
+            <point key="canvasLocation" x="262" y="371"/>
+        </view>
+    </objects>
+</document>

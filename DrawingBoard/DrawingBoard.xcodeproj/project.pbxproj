@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4930C82D1C22E2ED00EF447D /* ARGBColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930C82B1C22E2ED00EF447D /* ARGBColorPicker.swift */; };
+		4930C82E1C22E2ED00EF447D /* ARGBColorPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930C82C1C22E2ED00EF447D /* ARGBColorPicker.xib */; };
+		4930C8311C22E4CF00EF447D /* PaintingBrushSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930C8301C22E4CF00EF447D /* PaintingBrushSettingView.swift */; };
+		4930C8331C22E4FA00EF447D /* PaintingBrushSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930C8321C22E4FA00EF447D /* PaintingBrushSettingView.xib */; };
 		49ED87C91C2194A7007FEE6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87C81C2194A7007FEE6F /* AppDelegate.swift */; };
 		49ED87CB1C2194A7007FEE6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED87CA1C2194A7007FEE6F /* ViewController.swift */; };
 		49ED87CE1C2194A7007FEE6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED87CC1C2194A7007FEE6F /* Main.storyboard */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4930C82B1C22E2ED00EF447D /* ARGBColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARGBColorPicker.swift; sourceTree = "<group>"; };
+		4930C82C1C22E2ED00EF447D /* ARGBColorPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ARGBColorPicker.xib; sourceTree = "<group>"; };
+		4930C8301C22E4CF00EF447D /* PaintingBrushSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintingBrushSettingView.swift; sourceTree = "<group>"; };
+		4930C8321C22E4FA00EF447D /* PaintingBrushSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaintingBrushSettingView.xib; sourceTree = "<group>"; };
 		49ED87C51C2194A7007FEE6F /* DrawingBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49ED87C81C2194A7007FEE6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49ED87CA1C2194A7007FEE6F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +59,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4930C82A1C22E2C600EF447D /* ARGBColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				4930C82B1C22E2ED00EF447D /* ARGBColorPicker.swift */,
+				4930C82C1C22E2ED00EF447D /* ARGBColorPicker.xib */,
+			);
+			path = ARGBColorPicker;
+			sourceTree = "<group>";
+		};
+		4930C82F1C22E4A600EF447D /* PaintingBrushSetting */ = {
+			isa = PBXGroup;
+			children = (
+				4930C8301C22E4CF00EF447D /* PaintingBrushSettingView.swift */,
+				4930C8321C22E4FA00EF447D /* PaintingBrushSettingView.xib */,
+			);
+			path = PaintingBrushSetting;
+			sourceTree = "<group>";
+		};
 		49ED87BC1C2194A7007FEE6F = {
 			isa = PBXGroup;
 			children = (
@@ -71,12 +97,14 @@
 			isa = PBXGroup;
 			children = (
 				49ED87C81C2194A7007FEE6F /* AppDelegate.swift */,
+				4930C82A1C22E2C600EF447D /* ARGBColorPicker */,
 				49ED87CF1C2194A7007FEE6F /* Assets.xcassets */,
+				49ED87DA1C21AFAF007FEE6F /* Board */,
+				49ED87DF1C21BB07007FEE6F /* Brushs */,
 				49ED87D41C2194A7007FEE6F /* Info.plist */,
 				49ED87D11C2194A7007FEE6F /* LaunchScreen.storyboard */,
-				49ED87DF1C21BB07007FEE6F /* Brushs */,
-				49ED87DA1C21AFAF007FEE6F /* Board */,
 				49ED87CC1C2194A7007FEE6F /* Main.storyboard */,
+				4930C82F1C22E4A600EF447D /* PaintingBrushSetting */,
 				49ED87CA1C2194A7007FEE6F /* ViewController.swift */,
 			);
 			path = DrawingBoard;
@@ -163,8 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49ED87D31C2194A7007FEE6F /* LaunchScreen.storyboard in Resources */,
+				4930C82E1C22E2ED00EF447D /* ARGBColorPicker.xib in Resources */,
 				49ED87D01C2194A7007FEE6F /* Assets.xcassets in Resources */,
 				49ED87CE1C2194A7007FEE6F /* Main.storyboard in Resources */,
+				4930C8331C22E4FA00EF447D /* PaintingBrushSettingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,11 +205,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4930C8311C22E4CF00EF447D /* PaintingBrushSettingView.swift in Sources */,
 				49ED87EB1C21C059007FEE6F /* EraserBrush.swift in Sources */,
 				49ED87E71C21BE90007FEE6F /* RectangleBrush.swift in Sources */,
 				49ED87E11C21BB46007FEE6F /* PencilBrush.swift in Sources */,
 				49ED87CB1C2194A7007FEE6F /* ViewController.swift in Sources */,
 				49ED87DE1C21B322007FEE6F /* BaseBrush.swift in Sources */,
+				4930C82D1C22E2ED00EF447D /* ARGBColorPicker.swift in Sources */,
 				49ED87E51C21BDF8007FEE6F /* DashLineBrush.swift in Sources */,
 				49ED87C91C2194A7007FEE6F /* AppDelegate.swift in Sources */,
 				49ED87E91C21BF9B007FEE6F /* EllipseBrush.swift in Sources */,
@@ -334,6 +366,7 @@
 				49ED87D91C2194A7007FEE6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

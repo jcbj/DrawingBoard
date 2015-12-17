@@ -104,7 +104,7 @@ class Board: UIImageView {
             }
             
             //4.设置brush的基本属性，以便子类更方便的绘图；调用具体的绘图方法，并最终添加到context中
-            //TODO:为什么只设置宽度，而没有设置颜色
+            //TODO:为什么只设置宽度，而没有设置颜色;在画虚线时需要根据线的宽度设置间隔，所以传入，其他地方并不需要，所以颜色不用设置
             brush.strokeWidth = self.strokeWidth
             brush.drawInContext(context!)
             CGContextStrokePath(context)
