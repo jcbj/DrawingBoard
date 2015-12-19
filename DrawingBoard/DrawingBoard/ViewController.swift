@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         self.toolbarItems = self.toolbar.items
         
         self.setupBrushSettingView()
+        self.setupBackgroundSettingView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +53,16 @@ class ViewController: UIViewController {
         self.currentSettingView?.hidden = false
         
         self.updateToolbarForSettingView()
+    }
+    
+    @IBAction func backgroundSettings(sender: AnyObject) {
+        self.currentSettingView = self.toolbar.viewWithTag(2)
+        self.currentSettingView?.hidden = false
+        
+        self.updateToolbarForSettingView()
+    }
+    
+    @IBAction func saveImage(sender: AnyObject) {
     }
     
     func updateToolbarForSettingView() {
@@ -83,6 +94,26 @@ class ViewController: UIViewController {
             brushSettingView.strokeWidthChangedBlock = {
                 [unowned self] (strokeWidth: CGFloat) in
                 self.board.strokeWidth = strokeWidth
+            }
+        }
+    }
+    
+    func setupBackgroundSettingView() {
+        if let backgroundSettingVC = UINib(nibName: "BackgroundSettingVC", bundle: nil).instantiateWithOwner(nil, options: nil).first as? BackgroundSettingVC {
+            self.addConstraintsToToolbarForSettingView(backgroundSettingVC.view)
+            
+            backgroundSettingVC.view.hidden = true
+            backgroundSettingVC.view.tag = 2
+            backgroundSettingVC.setCurrentColor(self.board.backgroundColor!)
+            
+            backgroundSettingVC.backgroundColorChangedBlock = {
+                [unowned self] (color: UIColor) in
+                self.board.backgroundColor = color
+            }
+            
+            backgroundSettingVC.backgroundImageChangedBlock = {
+                [unowned self] (image: UIImage) in
+                self.board.backgroundColor = UIColor(patternImage: image)
             }
         }
     }

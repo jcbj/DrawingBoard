@@ -59,9 +59,17 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="MmS-dj-Us7"/>
-                                    <barButtonItem title="背景设置" id="Vjl-JT-fwk"/>
+                                    <barButtonItem title="背景设置" id="Vjl-JT-fwk">
+                                        <connections>
+                                            <action selector="backgroundSettings:" destination="BYZ-38-t0r" id="XMG-7n-g4C"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="d8t-ex-IvP"/>
-                                    <barButtonItem title="保存图片" id="rWV-mZ-PH9"/>
+                                    <barButtonItem title="保存图片" id="rWV-mZ-PH9">
+                                        <connections>
+                                            <action selector="saveImage:" destination="BYZ-38-t0r" id="oFu-cG-NRg"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
