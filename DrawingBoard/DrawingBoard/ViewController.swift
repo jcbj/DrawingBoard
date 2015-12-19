@@ -106,6 +106,8 @@ class ViewController: UIViewController {
             backgroundSettingVC.view.tag = 2
             backgroundSettingVC.setCurrentColor(self.board.backgroundColor!)
             
+            self.addChildViewController(backgroundSettingVC)
+            
             backgroundSettingVC.backgroundColorChangedBlock = {
                 [unowned self] (color: UIColor) in
                 self.board.backgroundColor = color

@@ -83,6 +83,8 @@ class BackgroundSettingVC: UIViewController ,UIImagePickerControllerDelegate,UIN
                 backgroundImageChangedBlock(image: image)
             }
         }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
