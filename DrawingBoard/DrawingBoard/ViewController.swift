@@ -41,10 +41,13 @@ class ViewController: UIViewController {
 //                    self.topView.center.y = -self.topView.center.y
 //                    self.toolbar.center.y = self.toolbar.center.y + self.toolbar.bounds.size.height
                     
-                    //3,这样设置，topView符合预期，隐藏了
-                    self.toolbarConstraintHeight.constant = 0
-                    //3,但toolbar背景隐藏了，画布也全屏了，但是按钮却还是显示没有隐藏
-                    self.topViewConstraintHeight.constant = 0
+//                    //3,这样设置，topView符合预期，隐藏了
+//                    self.toolbarConstraintHeight.constant = 0
+//                    //3,但toolbar背景隐藏了，画布也全屏了，但是按钮却还是显示没有隐藏
+//                    self.topViewConstraintHeight.constant = 0
+                    
+                    self.topView.center.y = -self.topView.center.y
+                    self.toolbar.center.y = self.toolbar.center.y + self.toolbar.bounds.size.height
                     
                     self.topView.layoutIfNeeded()
                     self.toolbar.layoutIfNeeded()
@@ -55,8 +58,11 @@ class ViewController: UIViewController {
 //                    self.topView.center.y = self.topView.bounds.size.height / 2.0
 //                    self.toolbar.center.y = self.view.bounds.height - self.toolbar.bounds.size.height / 2.0
                     
-                    self.toolbarConstraintHeight.constant = toolbarHeight
-                    self.topViewConstraintHeight.constant = topViewHeight
+//                    self.toolbarConstraintHeight.constant = toolbarHeight
+//                    self.topViewConstraintHeight.constant = topViewHeight
+                    
+                    self.topView.center.y = self.topView.bounds.height / 2.0
+                    self.toolbar.center.y = self.view.bounds.height - self.toolbar.bounds.size.height / 2.0
                     
                     self.topView.layoutIfNeeded()
                     self.toolbar.layoutIfNeeded()
