@@ -10,9 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var board: Board!
     @IBOutlet weak var toolbarConstraintHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var topViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var toolbar: UIToolbar!
     
     var brushes = [PencilBrush(), LineBrush(), DashLineBrush(), RectangleBrush(), EllipseBrush(), EraserBrush()]
@@ -25,6 +27,45 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         self.board.brush = brushes[0]
+        
+        let topViewHeight = self.topView.bounds.height
+        let toolbarHeight = self.toolbar.bounds.height
+        
+        self.board.drawingStateChangedBlock = {
+            [unowned self] (state: DrawingState) -> () in
+            if state != .Moved {
+                UIView.beginAnimations(nil, context: nil)
+                //1,同样存在第一次隐藏立即就显示，后面就正常符合预期。但打印的log显示，确实只打印了b，
+                if state == .Began {
+//                    //2,这样设置，view是不可见，但上下留下了空白
+//                    self.topView.center.y = -self.topView.center.y
+//                    self.toolbar.center.y = self.toolbar.center.y + self.toolbar.bounds.size.height
+                    
+                    //3,这样设置，topView符合预期，隐藏了
+                    self.toolbarConstraintHeight.constant = 0
+                    //3,但toolbar背景隐藏了，画布也全屏了，但是按钮却还是显示没有隐藏
+                    self.topViewConstraintHeight.constant = 0
+                    
+                    self.topView.layoutIfNeeded()
+                    self.toolbar.layoutIfNeeded()
+                    
+                    print("b")
+                } else if state == .Ended {
+                    UIView.setAnimationDelay(0.5)
+//                    self.topView.center.y = self.topView.bounds.size.height / 2.0
+//                    self.toolbar.center.y = self.view.bounds.height - self.toolbar.bounds.size.height / 2.0
+                    
+                    self.toolbarConstraintHeight.constant = toolbarHeight
+                    self.topViewConstraintHeight.constant = topViewHeight
+                    
+                    self.topView.layoutIfNeeded()
+                    self.toolbar.layoutIfNeeded()
+                    print("e")
+                }
+                
+                UIView.commitAnimations()
+            }
+        }
         
         self.toolbarEditingItems = [
             UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
@@ -63,6 +104,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func saveImage(sender: AnyObject) {
+        UIImageWriteToSavedPhotosAlbum(self.board.takeImage(), self, "image:didFinishSavingWithError:contextInfo:", nil)
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafePointer<Void>) {
+        if let err = error {
+            UIAlertView(title: "错误", message: err.localizedDescription, delegate: nil, cancelButtonTitle: "确定").show()
+        } else {
+            UIAlertView(title: "提示", message: "保存成功", delegate: nil, cancelButtonTitle: "确定").show()
+        }
     }
     
     func updateToolbarForSettingView() {

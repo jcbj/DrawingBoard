@@ -16,6 +16,8 @@ class Board: UIImageView {
 
     private var drawingState: DrawingState!
     
+    var drawingStateChangedBlock: ((state: DrawingState) -> Void)?
+    
     var strokeWidth: CGFloat
     var strokeColor: UIColor
     
@@ -82,9 +84,27 @@ class Board: UIImageView {
         }
     }
     
+    func takeImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.bounds.size)
+        
+        self.backgroundColor?.setFill()
+        UIRectFill(self.bounds)
+        
+        self.image?.drawInRect(self.bounds)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
     //MARK: - drawingImage
     private func drawingImage() {
         if let brush = self.brush {
+            if let drawingStateChangedBlock = self.drawingStateChangedBlock {
+                drawingStateChangedBlock(state: self.drawingState)
+            }
+            
             //1.开启一个新的ImageContext，为保存每次的绘图状态作准备
             UIGraphicsBeginImageContext(self.bounds.size)
             

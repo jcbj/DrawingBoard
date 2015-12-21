@@ -93,6 +93,8 @@
                         <outlet property="board" destination="y6h-xz-FUT" id="I7d-Ej-1Jz"/>
                         <outlet property="toolbar" destination="m1V-Ar-t9w" id="rcC-UY-aMW"/>
                         <outlet property="toolbarConstraintHeight" destination="E3p-A3-LgW" id="rnv-DU-77A"/>
+                        <outlet property="topView" destination="urW-m4-qzz" id="6Il-cC-4Z3"/>
+                        <outlet property="topViewConstraintHeight" destination="xrQ-cy-88b" id="pb0-nM-KRL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
