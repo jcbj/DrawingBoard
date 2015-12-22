@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var topViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var toolbar: UIToolbar!
     
+    @IBOutlet weak var buttonUndo: UIButton!
+    @IBOutlet weak var buttonRedo: UIButton!
+    
     var brushes = [PencilBrush(), LineBrush(), DashLineBrush(), RectangleBrush(), EllipseBrush(), EraserBrush()]
     
     var toolbarEditingItems: [UIBarButtonItem]?
@@ -52,6 +55,9 @@ class ViewController: UIViewController {
                     self.topView.layoutIfNeeded()
                     self.toolbar.layoutIfNeeded()
                     
+                    self.buttonRedo.alpha = 0
+                    self.buttonUndo.alpha = 0
+                    
                     print("b")
                 } else if state == .Ended {
                     UIView.setAnimationDelay(0.5)
@@ -66,6 +72,10 @@ class ViewController: UIViewController {
                     
                     self.topView.layoutIfNeeded()
                     self.toolbar.layoutIfNeeded()
+                    
+                    self.buttonRedo.alpha = 1
+                    self.buttonUndo.alpha = 1
+                    
                     print("e")
                 }
                 
@@ -202,6 +212,14 @@ class ViewController: UIViewController {
         UIView.commitAnimations()
         
         self.currentSettingView?.hidden = true
+    }
+    
+    @IBAction func undo(sender: AnyObject) {
+        self.board.undo()
+    }
+    
+    @IBAction func redo(sender: AnyObject) {
+        self.board.redo()
     }
 }
 
