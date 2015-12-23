@@ -112,9 +112,8 @@
                         <outlet property="buttonRedo" destination="6Sb-bY-9pT" id="7ST-Yo-17p"/>
                         <outlet property="buttonUndo" destination="2Ug-W2-ldd" id="5E2-Ih-3dw"/>
                         <outlet property="toolbar" destination="m1V-Ar-t9w" id="rcC-UY-aMW"/>
-                        <outlet property="toolbarConstraintHeight" destination="E3p-A3-LgW" id="rnv-DU-77A"/>
+                        <outlet property="toolbarConstraintHeight" destination="E3p-A3-LgW" id="wPz-BI-APy"/>
                         <outlet property="topView" destination="urW-m4-qzz" id="6Il-cC-4Z3"/>
-                        <outlet property="topViewConstraintHeight" destination="xrQ-cy-88b" id="pb0-nM-KRL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

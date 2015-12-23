@@ -14,15 +14,15 @@ enum DrawingState {
 
 class Board: UIImageView {
     
-    //
+    //用于维护撤销和恢复管理
     private class DBUndoManger {
-        //
+        //一个占位对象
         class DBImageFault: UIImage {}
         
         private static let INVALID_INDEX = -1
-        //
+        //图片栈
         private var images = [UIImage]()
-        //
+        //当前位置指针
         private var index = INVALID_INDEX
         
         var canUndo: Bool {
@@ -38,8 +38,9 @@ class Board: UIImageView {
         }
         
         func addImage(image: UIImage) {
-            //
+            //图片添加到图片栈
             if index < images.count - 1 {
+                //删除之前保存的，例如：之前保存了5步，撤销了3步，现在又重新画，则原来的第4，5步的图片就可以删除了。
                 images[index + 1 ... images.count - 1] = []
             }
             
@@ -51,41 +52,45 @@ class Board: UIImageView {
         }
         
         func imageForUndo() -> UIImage? {
+            var image: UIImage? = nil
+            
             if self.canUndo {
-                --index
+                index -= 1
                 
-                if self.canUndo == false {
-                    return nil
-                } else {
+                if index != DBUndoManger.INVALID_INDEX {
+                    image = images[index]
                     setNeedsCache()
-                    return images[index]
                 }
-            } else {
-                return nil
             }
+            
+            return image
         }
         
         func imageForRedo() -> UIImage? {
             var image: UIImage? = nil
+            
             if self.canRedo {
-                image = images[++index]
+                index += 1
+                
+                image = images[index]
             }
             
             setNeedsCache()
+            
             return image
         }
         
-        //
-        private static let cachesLength = 3
+        //缓存图片数目，可以只缓存当前索引及其前后各两张
+        private static let cachesLength = 2
+        
         private func setNeedsCache() {
+            
             if images.count >= DBUndoManger.cachesLength {
-                let location = max(0, index - DBUndoManger.cachesLength)
-                let length = min(images.count - 1, index + DBUndoManger.cachesLength)
-                for i in location ... length {
+                for i in 0 ..< images.count {
                     autoreleasepool({
                         let image = images[i]
                         
-                        if i > index - DBUndoManger.cachesLength && i < index + DBUndoManger.cachesLength {
+                        if (index - DBUndoManger.cachesLength) <= i && i <= index + DBUndoManger.cachesLength {
                             setRealImage(image, forIndex: i)
                         } else {
                             setFaultImage(image, forIndex: i)
@@ -95,20 +100,33 @@ class Board: UIImageView {
             }
         }
         
-        private static var basePath: String = NSSearchPathForDirectoriesInDomains(.DocumentationDirectory, .UserDomainMask, true).first!
+        private static var basePath: NSString = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first! as NSString
         
         private func setFaultImage(image: UIImage, forIndex: Int) {
             if !image.isKindOfClass(DBImageFault.self) {
-                let imagePath = (DBUndoManger.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
-                UIImagePNGRepresentation(image)?.writeToFile(imagePath, atomically: false)
-                images[forIndex] = DBImageFault()
+                let imagePath = DBUndoManger.basePath.stringByAppendingPathComponent("\(forIndex)")
+                if let dataImage = UIImagePNGRepresentation(image) {
+                    dataImage.writeToFile(imagePath, atomically: false)
+                    images[forIndex] = DBImageFault()
+                    print("\(imagePath)")
+                } else {
+                    print("Image cache failed")
+                }
             }
         }
         
         private func setRealImage(image: UIImage, forIndex: Int) {
             if image.isKindOfClass(DBImageFault.self) {
                 let imagePath = (DBUndoManger.basePath as NSString).stringByAppendingPathComponent("\(forIndex)")
-                images[forIndex] = UIImage(data: NSData(contentsOfFile: imagePath)!)!
+                
+                if (NSFileManager.defaultManager()).fileExistsAtPath(imagePath) {
+                    
+                    if let dataImage = NSData(contentsOfFile: imagePath) {
+                        if let image = UIImage(data: dataImage) {
+                            images[forIndex] = image
+                        }
+                    }
+                }
             }
         }
     }
@@ -269,7 +287,7 @@ class Board: UIImageView {
             }
             
             UIGraphicsEndImageContext()
-            
+            //将本次所画内容保存到缓存
             if self.drawingState == .Ended {
                 self.boardUndoManager.addImage(self.image!)
             }
@@ -280,8 +298,4 @@ class Board: UIImageView {
             brush.lastPoint = brush.endPoint
         }
     }
-    
-    
-    
-    
 }

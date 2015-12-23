@@ -12,10 +12,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var board: Board!
-    @IBOutlet weak var toolbarConstraintHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var topViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var toolbarConstraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var buttonUndo: UIButton!
     @IBOutlet weak var buttonRedo: UIButton!
@@ -31,52 +29,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.board.brush = brushes[0]
         
-        let topViewHeight = self.topView.bounds.height
-        let toolbarHeight = self.toolbar.bounds.height
-        
         self.board.drawingStateChangedBlock = {
             [unowned self] (state: DrawingState) -> () in
             if state != .Moved {
                 UIView.beginAnimations(nil, context: nil)
                 //1,同样存在第一次隐藏立即就显示，后面就正常符合预期。但打印的log显示，确实只打印了b，
                 if state == .Began {
-//                    //2,这样设置，view是不可见，但上下留下了空白
-//                    self.topView.center.y = -self.topView.center.y
-//                    self.toolbar.center.y = self.toolbar.center.y + self.toolbar.bounds.size.height
-                    
-//                    //3,这样设置，topView符合预期，隐藏了
-//                    self.toolbarConstraintHeight.constant = 0
-//                    //3,但toolbar背景隐藏了，画布也全屏了，但是按钮却还是显示没有隐藏
-//                    self.topViewConstraintHeight.constant = 0
-                    
-                    self.topView.center.y = -self.topView.center.y
-                    self.toolbar.center.y = self.toolbar.center.y + self.toolbar.bounds.size.height
-                    
-                    self.topView.layoutIfNeeded()
-                    self.toolbar.layoutIfNeeded()
-                    
                     self.buttonRedo.alpha = 0
                     self.buttonUndo.alpha = 0
+                    self.topView.alpha = 0
+                    self.toolbar.alpha = 0
                     
-                    print("b")
                 } else if state == .Ended {
                     UIView.setAnimationDelay(0.5)
-//                    self.topView.center.y = self.topView.bounds.size.height / 2.0
-//                    self.toolbar.center.y = self.view.bounds.height - self.toolbar.bounds.size.height / 2.0
-                    
-//                    self.toolbarConstraintHeight.constant = toolbarHeight
-//                    self.topViewConstraintHeight.constant = topViewHeight
-                    
-                    self.topView.center.y = self.topView.bounds.height / 2.0
-                    self.toolbar.center.y = self.view.bounds.height - self.toolbar.bounds.size.height / 2.0
-                    
-                    self.topView.layoutIfNeeded()
-                    self.toolbar.layoutIfNeeded()
                     
                     self.buttonRedo.alpha = 1
                     self.buttonUndo.alpha = 1
-                    
-                    print("e")
+                    self.topView.alpha = 1
+                    self.toolbar.alpha = 1
                 }
                 
                 UIView.commitAnimations()
